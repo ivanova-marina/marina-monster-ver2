@@ -10,7 +10,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <p>Work in progress</p>
+        <p className="text-indigo-600">Work in progress</p>
       </main>
     </>
   );
