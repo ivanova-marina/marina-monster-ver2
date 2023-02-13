@@ -1,6 +1,25 @@
 import Head from 'next/head';
+import { getArticlesData } from 'lib/articles';
+import { InferGetServerSidePropsType } from 'next';
 
-export default function Home() {
+interface ArticleProps {
+  id: string;
+  date?: string;
+  title?: string;
+}
+
+export async function getStaticProps() {
+  const allArticlesData: ArticleProps[] = getArticlesData();
+  return {
+    props: {
+      allArticlesData,
+    },
+  };
+}
+
+export default function Home({
+  allArticlesData,
+}: InferGetServerSidePropsType<typeof getStaticProps>) {
   return (
     <>
       <Head>
@@ -11,6 +30,17 @@ export default function Home() {
       </Head>
       <main>
         <p className="text-indigo-600">Work in progress</p>
+        <ul>
+          {allArticlesData.map(({ id, date, title }) => (
+            <li key={id}>
+              {title}
+              <br />
+              {id}
+              <br />
+              {date}
+            </li>
+          ))}
+        </ul>
       </main>
     </>
   );
