@@ -20,3 +20,14 @@ export function getArticlesData() {
   })
   return allData
 }
+
+export function getAllArticlesId() {
+  const fileNames = fs.readdirSync(articlesDir)
+  return fileNames.map((fileName) => {
+    return {
+      params: {
+        id: fileName.replace(/\.md$/, '')
+      }
+    }
+  })
+}
