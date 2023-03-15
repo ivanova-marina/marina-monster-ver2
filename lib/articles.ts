@@ -31,3 +31,15 @@ export function getAllArticlesId() {
     }
   })
 }
+
+export function getArticleData(id: string) {
+  const fullPath = path.join(articlesDir, `${id}.md`)
+  const fileContents = fs.readFileSync(fullPath, 'utf-8')
+
+  const matterResult = matter(fileContents)
+
+  return {
+    id,
+    ...matterResult.data
+  }
+}
